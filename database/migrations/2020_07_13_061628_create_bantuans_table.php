@@ -18,10 +18,12 @@ class CreateBantuansTable extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('penduduk_id')->unsigned();
             $table->bigInteger('jenisbantuan_id')->unsigned();
+            $table->string('profil', 100);
+            $table->string('kk', 100);
+            $table->string('ktp', 100);
             $table->string('status')->nullable();
             $table->timestamps();
-        });
-        Schema::table('bantuans', function (Blueprint $table) {
+
             $table->foreign('user_id')
                 ->references('id')->on('users')
                 ->onDelete('cascade')->onUpdate('cascade');

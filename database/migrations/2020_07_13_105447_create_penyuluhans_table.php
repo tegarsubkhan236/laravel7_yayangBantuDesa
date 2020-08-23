@@ -16,16 +16,24 @@ class CreatePenyuluhansTable extends Migration
         Schema::create('penyuluhans', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('bantuan_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('jenisbantuan_id')->unsigned();
             $table->date('tanggal_penyuluhan');
             $table->string('tempat', 50);
             $table->string('status', 20);
             $table->timestamps();
-        });
 
-        Schema::table('penyuluhans', function (Blueprint $table) {
             $table->foreign('bantuan_id')
                 ->references('id')->on('bantuans')
-                ->onDelete('cascade')->onUpdate('cascade');
+                ->onDelete('cascade');
+
+            $table->foreign('user_id')
+                ->references('id')->on('users')
+                ->onDelete('cascade');
+
+            $table->foreign('jenisbantuan_id')
+                ->references('id')->on('jenis_bantuans')
+                ->onDelete('cascade');
         });
     }
 

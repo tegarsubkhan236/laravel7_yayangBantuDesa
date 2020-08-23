@@ -15,10 +15,9 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('penduduk_id')->unsigned()->index()->nullable();
+            $table->bigInteger('penduduk_id')->unsigned()->nullable();
+            $table->string('nik', 16);
             $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
@@ -26,7 +25,7 @@ class CreateUsersTable extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->foreign('penduduk_id')
                 ->references('id')->on('penduduks')
-                ->onDelete('cascade')->onUpdate('cascade');
+                ->onDelete('set null')->onUpdate('set null');
         });
     }
 

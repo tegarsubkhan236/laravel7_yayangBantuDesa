@@ -17,7 +17,6 @@ class CreateKuotasTable extends Migration
             $table->id();
             $table->bigInteger('jenisbantuan_id')->unsigned();
             $table->integer('tersampaikan');
-            $table->integer('belum_tersampaikan');
             $table->timestamps();
 
             $table->foreign('jenisbantuan_id')
