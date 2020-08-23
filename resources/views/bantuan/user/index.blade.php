@@ -23,7 +23,7 @@
 <body class="goto-here">
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 		<div class="container">
-            <a class="navbar-brand" href="index.html">Desa Makmur Jaya</a>
+            <a class="navbar-brand" href="index.html">Desa Sukawana</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="oi oi-menu"></span> Menu
             </button>
@@ -56,11 +56,11 @@
 		</div>
 	</nav>
     <!-- END nav -->
-    <div class="hero-wrap hero-bread" style="background-image:  url({{ asset('LandingPage/images/web-desa-bg.jpg') }});">
+    <div class="hero-wrap hero-bread" style="background-image:  url({{ asset('LandingPage/images/sukawana_2.jpeg') }});">
         <div class="container">
             <div class="row no-gutters slider-text align-items-center justify-content-center">
                 <div class="col-md-9 ftco-animate text-center">
-                    <h1 class="mb-0 bread">Ajukan Bantuan</h1>
+                    <h1 class="mb-0 bread"></h1>
                 </div>
             </div>
         </div>
@@ -75,70 +75,88 @@
     <div class="row block-12 ">
         <div class="col-md-12 order-md-last d-flex align-items-center justify-content-center">
                 
-            <form action="{{ url('bantuan') }}" method="POST" class="bg-white p-5 contact-form">
+            <form action="{{ url('bantuan') }}" method="POST" enctype="multipart/form-data" class="bg-white p-5 contact-form">
                 @csrf
                 <h1 class="mb-0 bread">Ajukan Bantuan</h1>
-                @foreach ($user as $data)
-                <div class="form-group">
-                    <input type="number" name="penduduk_id" value="{{ $data->penduduk->id }}" class="form-control" hidden>
+                <div class="row">
+                <div class="col-6">
+                    @foreach ($user as $data)
+                    <div class="form-group">
+                        <input type="number" name="penduduk_id" value="{{ $data->penduduk->id }}" class="form-control" hidden>
+                    </div>
+                    <div class="form-group">
+                        <input type="number" name="user_id" value="{{ $data->id }}" class="form-control" hidden>
+                    </div>
+                    <div class="form-group">
+                        <label>NIK</label>
+                        <input type="number" value="{{ $data->penduduk->nik }}" class="form-control" autofocus readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>KK</label>
+                        <input type="number" value="{{ $data->penduduk->kk }}" class="form-control" autofocus readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Nama</label>
+                        <input type="text" value="{{ $data->penduduk->nama }}" class="form-control" autofocus readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Jenis Kelamin</label>
+                        <input type="text" value="{{ $data->penduduk->jenis_kelamin }}" class="form-control" autofocus readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Alamat</label>
+                        <textarea name="alamat" class="form-control" readonly>
+                            {{ $data->penduduk->alamat }}
+                        </textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>No Telp</label>
+                        <input type="text" value="{{ $data->penduduk->no_hp }}" class="form-control" autofocus readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Pekerjaan</label>
+                        <input type="text" name="pekerjaan_penduduk" value="{{ $data->penduduk->pekerjaan->pekerjaan }}" class="form-control" autofocus readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Penghasilan</label>
+                        <input type="text"  name="penghasilan_penduduk" value="{{ $data->penduduk->pekerjaan->penghasilan }}" class="form-control" autofocus readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>pendidikan</label>
+                        <input type="text" value="{{ $data->penduduk->pendidikan }}" class="form-control" autofocus readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Jumlah Keluarga</label>
+                        <input type="text" value="{{ $data->penduduk->jumlah_keluarga }}" class="form-control" autofocus readonly>
+                    </div>
+                    @endforeach
                 </div>
-                <div class="form-group">
-                    <input type="number" name="user_id" value="{{ $data->id }}" class="form-control" hidden>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label>Jenis Bantuan</label>
+                        <select name="jenisbantuan_id" class="form-control">
+                            @foreach ($jenisbantuan as $jenis)
+                            <option value="{{ $jenis->id }}|{{ $jenis->sasaran->pekerjaan->pekerjaan }}|{{ $jenis->sasaran->pekerjaan->penghasilan }}"> {{ $jenis->nama }}</option>                            
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Foto Profil</label>
+                        <input type="file" name="profil" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Foto Kartu Keluarga</label>
+                        <input type="file" name="kk" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Foto Kartu Tanda Penduduk</label>
+                        <input type="file" name="ktp" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <center><button type="submit" class="btn btn-success align-content-center">Ajukan Bantuan</button></center>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>NIK</label>
-                    <input type="number" value="{{ $data->penduduk->nik }}" class="form-control" autofocus readonly>
-                </div>
-                <div class="form-group">
-                    <label>KK</label>
-                    <input type="number" value="{{ $data->penduduk->kk }}" class="form-control" autofocus readonly>
-                </div>
-                <div class="form-group">
-                    <label>Nama</label>
-                    <input type="text" value="{{ $data->penduduk->nama }}" class="form-control" autofocus readonly>
-                </div>
-                <div class="form-group">
-                    <label>Jenis Kelamin</label>
-                    <input type="text" value="{{ $data->penduduk->jenis_kelamin }}" class="form-control" autofocus readonly>
-                </div>
-                <div class="form-group">
-                    <label>Alamat</label>
-                    <textarea name="alamat" class="form-control" readonly>
-                        {{ $data->penduduk->alamat }}
-                    </textarea>
-                </div>
-                <div class="form-group">
-                    <label>No Telp</label>
-                    <input type="text" value="{{ $data->penduduk->no_hp }}" class="form-control" autofocus readonly>
-                </div>
-                <div class="form-group">
-                    <label>Pekerjaan</label>
-                    <input type="text" value="{{ $data->penduduk->pekerjaan }}" class="form-control" autofocus readonly>
-                </div>
-                <div class="form-group">
-                    <label>Penghasilan</label>
-                    <input type="text" value="{{ $data->penduduk->penghasilan }}" class="form-control" autofocus readonly>
-                </div>
-                <div class="form-group">
-                    <label>pendidikan</label>
-                    <input type="text" value="{{ $data->penduduk->pendidikan }}" class="form-control" autofocus readonly>
-                </div>
-                <div class="form-group">
-                    <label>Jumlah Keluarga</label>
-                    <input type="text" value="{{ $data->penduduk->jumlah_keluarga }}" class="form-control" autofocus readonly>
-                </div>
-                <div class="form-group">
-                    <label>Jenis Bantuan</label>
-                    <select name="jenisbantuan_id" class="form-control">
-                        @foreach ($jenisbantuan as $jenis)
-                        <option value="{{ $jenis->id }}"> {{ $jenis->nama }} [{{ $jenis->nominal }}] </option>                            
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-success align-content-center">Ajukan Bantuan</button>
-                </div>
-                @endforeach
+            </div>
             </form>
         </div>
     </div>

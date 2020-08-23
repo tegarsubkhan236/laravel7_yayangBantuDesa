@@ -1,5 +1,9 @@
 @extends('home')
+@section('title')
+    Laporan Penyuluhan Tidak Dilaksanakan    
+@endsection
 @section('content')
+
 <div class="container-fluid">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Laporan Tidak Dilaksanakan</h1>
@@ -25,6 +29,7 @@
                     <th>Nama Penerima</th>
                     <th>Nominal Diterima</th>
                     <th>Tanggal Pengajuan</th>
+                    <th>Tempat Penyuluhan</th>
                     <th>Tanggal Penyuluhan</th>
                     <th>Status</th>
                 </tr>
@@ -37,7 +42,8 @@
                     <td>{{ $x->bantuan->penduduk->nama }}</td>
                     <td>Rp. {{ $x->bantuan->jenisbantuan->nominal }}</td>
                     <td>{{ $x->bantuan->created_at->format('d-m-Y') }}</td>
-                    <td>{{ $x->tanggal_penyuluhan }}</td>
+                    <td>{{ $x->bantuan->jenisbantuan->tempat }}</td>
+                    <td>{{ $x->bantuan->jenisbantuan->tgl_penyuluhan->format('d-m-Y') }}</td>
                     <td>{{ $x->status }}</td>
                 </tr>
                 @endforeach

@@ -17,42 +17,21 @@
                 @csrf
                 <div class="form-group">
                     <label>Penduduk</label>
-                    <input type="text" 
-                    name="penduduk_id" 
-                    value="{{ old('penduduk_id', $data->penduduk->nama) }}" 
-                    class="form-control 
-                    @error('penduduk_id') is-invalid @enderror" autofocus
-                    readonly>
+                    <input type="text" name="penduduk_id" value="{{ old('penduduk_id', $data->penduduk->nama) }}" class="form-control" autofocus readonly>
                 </div>
                 <div class="form-group">
                     <label>Username</label>
-                    <input type="text" 
-                    name="name" 
-                    value="{{ old('name', $data->name) }}" 
-                    class="form-control 
-                    @error('name') is-invalid @enderror" autofocus>
-                    @error('name')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+                    <input type="text" name="name" value="{{ old('name', $data->name) }}" 
+                    class="form-control" autofocus readonly>
                 </div>
                 <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" 
-                    name="email" 
-                    value="{{ old('email', $data->email) }}" 
-                    class="form-control 
-                    @error('email') is-invalid @enderror" autofocus>
-                    @error('email')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+                    <label>NIK</label>
+                    <input type="text" name="nik" value="{{ old('nik', $data->nik) }}" 
+                    class="form-control" autofocus readonly>
                 </div>
                 <div class="form-group">
                     <label>Password</label>
-                    <input type="text" 
-                    name="password" 
-                    value="{{ old('password', $data->password) }}" 
-                    class="form-control 
-                    @error('password') is-invalid @enderror" autofocus>
+                    <input type="text" name="password" value="{{ old('password', $data->password) }}" class="form-control @error('password') is-invalid @enderror" autofocus>
                     @error('password')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror

@@ -21,7 +21,7 @@
                     name="nik" 
                     value="{{ old('nik', $data->nik) }}" 
                     class="form-control 
-                    @error('nik') is-invalid @enderror" autofocus>
+                    @error('nik') is-invalid @enderror" autofocus readonly>
                     @error('nik')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -32,7 +32,7 @@
                     name="kk" 
                     value="{{ old('kk',$data->kk) }}" 
                     class="form-control 
-                    @error('kk') is-invalid @enderror" autofocus>
+                    @error('kk') is-invalid @enderror" autofocus readonly>
                     @error('kk')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -77,25 +77,12 @@
                 </div>
                 <div class="form-group">
                     <label>Pekerjaan</label>
-                    <input type="text" 
-                    name="pekerjaan" 
-                    value="{{ old('pekerjaan', $data->pekerjaan) }}" 
-                    class="form-control 
-                    @error('pekerjaan') is-invalid @enderror" autofocus>
-                    @error('pekerjaan')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label>Penghasilan</label>
-                    <input type="number" 
-                    name="penghasilan" 
-                    value="{{ old('penghasilan', $data->penghasilan) }}" 
-                    class="form-control 
-                    @error('penghasilan') is-invalid @enderror" autofocus>
-                    @error('penghasilan')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+                    <select name="pekerjaan_id" class="form-control">
+                        <option value="{{ $data->pekerjaan->id }}">{{ $data->pekerjaan->pekerjaan }}</option>
+                        @foreach ($pekerjaan as $p)
+                        <option value="{{ $p->id }}"> {{ $p->pekerjaan }}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="form-group">
                     <label>pendidikan</label>

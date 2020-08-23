@@ -12,7 +12,7 @@
         </div>
         <div class="card-body">
         <div class="table-responsive">
-            <form action="{{url('sasaran',$data->id)}}" method="POST">
+            <form action="{{url('penyuluhan',$data->id)}}" method="POST">
                 @method('PATCH')
                 @csrf
                 <div class="form-group">
@@ -23,33 +23,11 @@
                             <option value="{{$x->id}}">{{$x->id}}</option>
                         @endforeach
                     </select>
-                </div> 
-                <div class="form-group">
-                    <label>Tempat Penyuluhan</label>
-                    <input type="text" 
-                    name="tempat" 
-                    value="{{ old('tempat', $data->tempat) }}" 
-                    class="form-control 
-                    @error('tempat') is-invalid @enderror" autofocus>
-                    @error('tempat')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div> 
-                <div class="form-group">
-                    <label>Tanggal Penyuluhan</label>
-                    <input type="date" 
-                    name="tanggal_penyuluhan" 
-                    value="{{ old('tanggal_penyuluhan', $data->tanggal_penyuluhan) }}" 
-                    class="form-control 
-                    @error('tanggal_penyuluhan') is-invalid @enderror" autofocus>
-                    @error('tanggal_penyuluhan')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div> 
+                </div>
                 <div class="form-group">
                     <label>Status</label>
                     <select name="status" class="form-control">
-                        <option value="Menunggu Dilaksanakan">Menunggu Dilaksanakan</option>
+                        <option value="Tidak Dilaksanakan">Tidak Dilaksanakan</option>
                         <option value="Sudah Dilaksanakan">Sudah Dilaksanakan</option>
                     </select>
                 </div> 

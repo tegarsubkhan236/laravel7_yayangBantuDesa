@@ -13,9 +13,24 @@
         <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">Data Penduduk</h6>
         </div>
+        <form action="/penduduk/cari" method="GET">
+            <div class="form-group">
+                <input type="text" name="cari" class="form-control" placeholder="Cari Nomer KK .." value="{{ old('cari') }}">
+                <input type="submit" class='btn btn-success' value="CARI">
+            </div>
+        </form>
         @if (session('status'))
             <div class="alert alert-success">
                 {{ session('status') }}
+            </div>
+        @endif
+        @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
             </div>
         @endif
         <div class="card-body">
@@ -47,8 +62,8 @@
                     <td>{{ $penduduk->jenis_kelamin }}</td>
                     <td>{{ $penduduk->alamat }}</td>
                     <td>{{ $penduduk->no_hp }}</td>
-                    <td>{{ $penduduk->pekerjaan }}</td>
-                    <td>{{ $penduduk->penghasilan }}</td>
+                    <td>{{ $penduduk->pekerjaan->pekerjaan }}</td>
+                    <td>{{ $penduduk->pekerjaan->penghasilan }}</td>
                     <td>{{ $penduduk->pendidikan }}</td>
                     <td>{{ $penduduk->jumlah_keluarga }}</td>
                     <td class="text-center">
@@ -94,7 +109,7 @@
                     name="nik" 
                     value="{{ old('nik') }}" 
                     class="form-control 
-                    @error('nik') is-invalid @enderror" autofocus>
+                    @error('nik') is-invalid @enderror">
                     @error('nik')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -149,26 +164,13 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label>Pekerjaan</label>
-                    <input type="text" 
-                    name="pekerjaan" 
-                    value="{{ old('pekerjaan') }}" 
-                    class="form-control 
-                    @error('pekerjaan') is-invalid @enderror" autofocus>
-                    @error('pekerjaan')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label>Penghasilan</label>
-                    <input type="number" 
-                    name="penghasilan" 
-                    value="{{ old('penghasilan') }}" 
-                    class="form-control 
-                    @error('penghasilan') is-invalid @enderror" autofocus>
-                    @error('penghasilan')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+                    <label>ID Pekerjaan</label>
+                    <select name="pekerjaan_id" class="form-control">
+                        <option hidden> ==Pilih ID Pekerjaan== </option>
+                        @foreach ($pekerjaan as $x)
+                        <option value="{{$x->id}}"> {{$x->id}} | {{$x->pekerjaan}} | {{$x->penghasilan}} </option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="form-group">
                     <label>pendidikan</label>

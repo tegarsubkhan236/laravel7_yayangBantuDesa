@@ -23,7 +23,7 @@
 <body class="goto-here">
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 		<div class="container">
-            <a class="navbar-brand" href="index.html">Desa Makmur Jaya</a>
+            <a class="navbar-brand" href="index.html">Desa Sukawana</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="oi oi-menu"></span> Menu
             </button>
@@ -59,39 +59,39 @@
 
 	<section id="home-section" class="hero">
 		<div class="home-slider owl-carousel">
-		<div class="slider-item" style="background-image: url({{ asset('LandingPage/images/web-desa-bg.jpg') }});">
+		<div class="slider-item" style="background-image: url({{ asset('LandingPage/images/sukawana_2.jpeg') }});">
 			<div class="overlay"></div>
 			<div class="container">
 			<div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
 
 				<div class="col-md-12 ftco-animate text-center">
-				<h1 class="mb-2">Desa Makmur Jaya semakin di depan</h1>
+				<h1 class="mb-2"></h1>
 				</div>
 
 			</div>
 			</div>
 		</div>
 
-		<div class="slider-item" style="background-image: url({{ asset('LandingPage/images/bg_3.jpg') }});">
+		<div class="slider-item" style="background-image: url({{ asset('LandingPage/images/sukawana_3.jpeg') }});">
 			<div class="overlay"></div>
 			<div class="container">
 			<div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
 
 				<div class="col-md-12 ftco-animate text-center">
-				<h1 class="mb-2">selalu gotong royong</h1>
+				<h1 class="mb-2"></h1>
 				</div>
 
 			</div>
 			</div>
 		</div>
 
-		<div class="slider-item" style="background-image: url({{ asset('LandingPage/images/bg_4.jpg') }});">
+		<div class="slider-item" style="background-image: url({{ asset('LandingPage/images/sukawana_1.jpeg') }});">
 			<div class="overlay"></div>
 			<div class="container">
 			<div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
 
 				<div class="col-sm-12 ftco-animate text-center">
-				<h1 class="mb-2">dan peduli sesama manusia</h1>
+				<h1 class="mb-2"></h1>
 				</div>
 
 			</div>
@@ -109,8 +109,7 @@
                             <span class="flaticon-shipped"></span>
                         </div>
                         <div class="media-body">
-                            <h3 class="heading">Free Shipping</h3>
-                            <span>On order over $100</span>
+                            <h3 class="heading">Cerdas</h3>
                         </div>
                     </div>      
                 </div>
@@ -120,8 +119,7 @@
                             <span class="flaticon-diet"></span>
                         </div>
                         <div class="media-body">
-                            <h3 class="heading">Always Fresh</h3>
-                            <span>Product well package</span>
+                            <h3 class="heading">Maju</h3>
                         </div>
                     </div>    
                 </div>
@@ -131,8 +129,7 @@
                             <span class="flaticon-award"></span>
                         </div>
                         <div class="media-body">
-                            <h3 class="heading">Superior Quality</h3>
-                            <span>Quality Products</span>
+                            <h3 class="heading">Mandiri</h3>
                         </div>
                     </div>      
                 </div>
@@ -142,8 +139,7 @@
                             <span class="flaticon-customer-service"></span>
                         </div>
                         <div class="media-body">
-                            <h3 class="heading">Support</h3>
-                            <span>24/7 Support</span>
+                            <h3 class="heading">Sejahtera</h3>
                         </div>
                     </div>      
                 </div>
@@ -153,26 +149,32 @@
 
     <section class="ftco-section ftco-category ftco-no-pt">
         <div class="container">
+			<div class="row justify-content-center mb-3 pb-3">
+                <div class="col-md-12 heading-section text-center ftco-animate">
+                    <span class="subheading">Featured Villages</span>
+                    <h2 class="mb-4">Kegiatan Desa</h2>
+                </div>
+            </div>   		
+		</div>
+        <div class="container">
             <div class="row">
                 <div class="col-md-8">
                     <div class="row">
                         <div class="col-md-6 order-md-last align-items-stretch d-flex">
-                            <div class="category-wrap-2 ftco-animate img align-self-stretch d-flex" style="background-image: url({{ asset('LandingPage/images/category.jpg') }});">
+                            <div class="category-wrap-2 ftco-animate img align-self-stretch d-flex" style="background-image: url({{ asset('LandingPage/images/sukawana_2.jpeg') }});">
                                 <div class="text text-center">
-                                    <h2>Kegiatan Desa</h2>
-                                    <p>Protect the health of every home</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="category-wrap ftco-animate img mb-4 d-flex align-items-end" style="background-image: url({{ asset('LandingPage/images/category-1.jpg') }});">
+                            <div class="category-wrap ftco-animate img mb-4 d-flex align-items-end" style="background-image: url({{ asset('LandingPage/images/sukawana_1.jpeg') }});">
                                 <div class="text px-3 py-1">
-                                    <h2 class="mb-0"><a href="#">Fruits</a></h2>
+                                    <h2 class="mb-0"><a href="#"></a></h2>
                                 </div>
                             </div>
-                            <div class="category-wrap ftco-animate img d-flex align-items-end" style="background-image: url({{ asset('LandingPage/images/category-2.jpg') }});">
+                            <div class="category-wrap ftco-animate img d-flex align-items-end" style="background-image: url({{ asset('LandingPage/images/sukawana_2.jpeg') }});">
                                 <div class="text px-3 py-1">
-                                    <h2 class="mb-0"><a href="#">Vegetables</a></h2>
+                                    <h2 class="mb-0"><a href="#"></a></h2>
                                 </div>
                             </div>
                         </div>
@@ -180,14 +182,14 @@
                 </div>
 
                 <div class="col-md-4">
-                    <div class="category-wrap ftco-animate img mb-4 d-flex align-items-end" style="background-image: url({{ asset('LandingPage/images/category-3.jpg') }});">
+                    <div class="category-wrap ftco-animate img mb-4 d-flex align-items-end" style="background-image: url({{ asset('LandingPage/images/sukawana_3.jpeg') }});">
                         <div class="text px-3 py-1">
-                            <h2 class="mb-0"><a href="#">Juices</a></h2>
+                            <h2 class="mb-0"><a href="#"></a></h2>
                         </div>		
                     </div>
-                    <div class="category-wrap ftco-animate img d-flex align-items-end" style="background-image: url({{ asset('LandingPage/images/category-4.jpg') }});">
+                    <div class="category-wrap ftco-animate img d-flex align-items-end" style="background-image: url({{ asset('LandingPage/images/sukawana_1.jpeg') }});">
                         <div class="text px-3 py-1">
-                            <h2 class="mb-0"><a href="#">Dried</a></h2>
+                            <h2 class="mb-0"><a href="#"></a></h2>
                         </div>
                     </div>
                 </div>
@@ -213,7 +215,7 @@
 							<div class="overlay"></div>
 						</a>
 						<div class="text py-3 pb-4 px-3 text-center">
-							<h3><a href="#">Bell Pepper</a></h3>
+							<h3><a href="#">Bantuan Langsung Tunai</a></h3>
 						</div>
 					</div>
 				</div>
@@ -223,7 +225,7 @@
 							<div class="overlay"></div>
 						</a>
 						<div class="text py-3 pb-4 px-3 text-center">
-							<h3><a href="#">Bell Pepper</a></h3>
+							<h3><a href="#">Bantuan Langsung Tunai</a></h3>
 						</div>
 					</div>
 				</div>
@@ -233,7 +235,7 @@
 							<div class="overlay"></div>
 						</a>
 						<div class="text py-3 pb-4 px-3 text-center">
-							<h3><a href="#">Bell Pepper</a></h3>
+							<h3><a href="#">Bantuan Langsung Tunai</a></h3>
 						</div>
 					</div>
 				</div>
@@ -243,7 +245,7 @@
 							<div class="overlay"></div>
 						</a>
 						<div class="text py-3 pb-4 px-3 text-center">
-							<h3><a href="#">Bell Pepper</a></h3>
+							<h3><a href="#">Bantuan Langsung Tunai</a></h3>
 						</div>
 					</div>
 				</div>
@@ -255,7 +257,7 @@
 							<div class="overlay"></div>
 						</a>
 						<div class="text py-3 pb-4 px-3 text-center">
-							<h3><a href="#">Bell Pepper</a></h3>
+							<h3><a href="#">Bantuan Langsung Tunai</a></h3>
 						</div>
 					</div>
 				</div>
@@ -265,7 +267,7 @@
 							<div class="overlay"></div>
 						</a>
 						<div class="text py-3 pb-4 px-3 text-center">
-							<h3><a href="#">Bell Pepper</a></h3>
+							<h3><a href="#">Bantuan Langsung Tunai</a></h3>
 						</div>
 					</div>
 				</div>
@@ -275,7 +277,7 @@
 							<div class="overlay"></div>
 						</a>
 						<div class="text py-3 pb-4 px-3 text-center">
-							<h3><a href="#">Bell Pepper</a></h3>
+							<h3><a href="#">Bantuan Langsung Tunai</a></h3>
 						</div>
 					</div>
 				</div>
@@ -285,7 +287,7 @@
 							<div class="overlay"></div>
 						</a>
 						<div class="text py-3 pb-4 px-3 text-center">
-							<h3><a href="#">Bell Pepper</a></h3>
+							<h3><a href="#">Bantuan Langsung Tunai</a></h3>
 						</div>
 					</div>
 				</div>
@@ -299,7 +301,6 @@
             <div class="col-md-7 heading-section ftco-animate text-center">
                 <span class="subheading">Staf Desa</span>
                 <h2 class="mb-4">Perangkat kepengurusan Desa</h2>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in</p>
             </div>
             </div>
             <div class="row ftco-animate">
@@ -307,71 +308,71 @@
                 <div class="carousel-testimony owl-carousel">
                 <div class="item">
                     <div class="testimony-wrap p-4 pb-5">
-                    <div class="user-img mb-5" style="background-image: url({{ asset('LandingPage/images/person_1.jpg') }})">
+                    <div class="user-img mb-5" style="background-image: url({{ asset('LandingPage/images/yayang.jpg') }})">
                         <span class="quote d-flex align-items-center justify-content-center">
                         <i class="icon-quote-left"></i>
                         </span>
                     </div>
                     <div class="text text-center">
-                        <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                        <p class="name">Garreth Smith</p>
-                        <span class="position">Marketing Manager</span>
+                        <p class="mb-5 pl-4 line">Dont call me "yayang". Call me "sayang"</p>
+                        <p class="name">Yayang the explorer</p>
+                        <span class="position">Cleaning Share Fish</span>
                     </div>
                     </div>
                 </div>
                 <div class="item">
                     <div class="testimony-wrap p-4 pb-5">
-                    <div class="user-img mb-5" style="background-image: url({{ asset('LandingPage/images/person_2.jpg') }})">
+                    <div class="user-img mb-5" style="background-image: url({{ asset('LandingPage/images/yayang.jpg') }})">
                         <span class="quote d-flex align-items-center justify-content-center">
                         <i class="icon-quote-left"></i>
                         </span>
                     </div>
                     <div class="text text-center">
-                        <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                        <p class="name">Garreth Smith</p>
-                        <span class="position">Interface Designer</span>
+                        <p class="mb-5 pl-4 line">Dont call me "yayang". Call me "sayang"</p>
+                        <p class="name">Yayang the explorer</p>
+                        <span class="position">Cleaning Share Fish</span>
                     </div>
                     </div>
                 </div>
                 <div class="item">
                     <div class="testimony-wrap p-4 pb-5">
-                    <div class="user-img mb-5" style="background-image: url({{ asset('LandingPage/images/person_3.jpg') }})">
+                    <div class="user-img mb-5" style="background-image: url({{ asset('LandingPage/images/yayang.jpg') }})">
                         <span class="quote d-flex align-items-center justify-content-center">
                         <i class="icon-quote-left"></i>
                         </span>
                     </div>
                     <div class="text text-center">
-                        <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                        <p class="name">Garreth Smith</p>
-                        <span class="position">UI Designer</span>
+                        <p class="mb-5 pl-4 line">Dont call me "yayang". Call me "sayang"</p>
+                        <p class="name">Yayang the explorer</p>
+                        <span class="position">Cleaning Share Fish</span>
                     </div>
                     </div>
                 </div>
                 <div class="item">
                     <div class="testimony-wrap p-4 pb-5">
-                    <div class="user-img mb-5" style="background-image: url({{ asset('LandingPage/images/person_1.jpg') }})">
+                    <div class="user-img mb-5" style="background-image: url({{ asset('LandingPage/images/yayang.jpg') }})">
                         <span class="quote d-flex align-items-center justify-content-center">
                         <i class="icon-quote-left"></i>
                         </span>
                     </div>
                     <div class="text text-center">
-                        <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                        <p class="name">Garreth Smith</p>
-                        <span class="position">Web Developer</span>
+                        <p class="mb-5 pl-4 line">Dont call me "yayang". Call me "sayang"</p>
+                        <p class="name">Yayang the explorer</p>
+                        <span class="position">Cleaning Share Fish</span>
                     </div>
                     </div>
                 </div>
                 <div class="item">
                     <div class="testimony-wrap p-4 pb-5">
-                    <div class="user-img mb-5" style="background-image: url({{ asset('LandingPage/images/person_1.jpg') }})">
+                    <div class="user-img mb-5" style="background-image: url({{ asset('LandingPage/images/yayang.jpg') }})">
                         <span class="quote d-flex align-items-center justify-content-center">
                         <i class="icon-quote-left"></i>
                         </span>
                     </div>
                     <div class="text text-center">
-                        <p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                        <p class="name">Garreth Smith</p>
-                        <span class="position">System Analyst</span>
+                        <p class="mb-5 pl-4 line">Dont call me "yayang". Call me "sayang"</p>
+                        <p class="name">Yayang the explorer</p>
+                        <span class="position">Cleaning Share Fish</span>
                     </div>
                     </div>
                 </div>

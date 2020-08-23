@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\jenisBantuan;
+use App\Pekerjaan;
 use App\Sasaran;
 use Illuminate\Http\Request;
 
@@ -16,7 +17,8 @@ class SasaranController extends Controller
     public function index()
     {
         $sasaran = Sasaran::all();
-        return view('sasaran.index', compact('sasaran'));
+        $pekerjaan = Pekerjaan::all();
+        return view('sasaran.index', compact('sasaran', 'pekerjaan'));
     }
 
     /**
@@ -37,13 +39,8 @@ class SasaranController extends Controller
      */
     public function store(Request $request)
     {
-        $validateData = $request->validate([
-            'sasaran' => 'required',
-            'kriteria' => 'required',
-        ]);
         $data = new Sasaran;
-        $data->sasaran = $request->sasaran;
-        $data->kriteria = $request->kriteria;
+        $data->pekerjaan_id = $request->pekerjaan_id;
         $data->save();
         return redirect('sasaran')->with('status', 'Data Jenis Bantuan berhasil di Tambah !');
     }
@@ -68,7 +65,8 @@ class SasaranController extends Controller
     public function edit($id)
     {
         $data = Sasaran::find($id);
-        return view('sasaran.update', compact('data'));
+        $pekerjaan = Pekerjaan::all();
+        return view('sasaran.update', compact('data', 'pekerjaan'));
     }
 
     /**
@@ -80,13 +78,8 @@ class SasaranController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validateData = $request->validate([
-            'sasaran' => 'required',
-            'kriteria' => 'required',
-        ]);
         $data = Sasaran::find($id);
-        $data->sasaran = $request->sasaran;
-        $data->kriteria = $request->kriteria;
+        $data->pekerjaan_id = $request->pekerjaan_id;
         $data->save();
         return redirect('sasaran')->with('status', 'Data Jenis Bantuan berhasil di Update !');
     }

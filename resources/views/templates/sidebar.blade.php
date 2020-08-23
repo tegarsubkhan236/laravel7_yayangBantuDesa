@@ -4,79 +4,111 @@
         <div class="sidebar-brand-icon rotate-n-15">
         <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">Makmur Jaya</div>
+        <div class="sidebar-brand-text mx-3">Sukawana</div>
     </a>
     <hr class="sidebar-divider my-0">
 
-    <li class="nav-item">
+    <li class="nav-item {{ request()->is('home') ? 'active' : '' }}">
         <a class="nav-link" href="{{ url('home') }}">
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Dashboard</span></a>
     </li>
+    @if (Auth::user()->name == 'admin')
     <hr class="sidebar-divider my-0">
 
-    <li class="nav-item">
+    <li class="nav-item {{ request()->is('pekerjaan') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ url('pekerjaan') }}">
+        <i class="fas fa-fw fa-table"></i>
+        <span>Pekerjaan</span></a>
+    </li>
+    <li class="nav-item {{ request()->is('penduduk') ? 'active' : '' }}">
         <a class="nav-link" href="{{ url('penduduk') }}">
         <i class="fas fa-fw fa-table"></i>
         <span>Penduduk</span></a>
     </li>
-
-    <li class="nav-item">
+    <li class="nav-item {{ request()->is('user') ? 'active' : '' }}">
         <a class="nav-link" href="{{ url('user') }}">
         <i class="fas fa-fw fa-table"></i>
         <span>User</span></a>
     </li>
+    <hr class="sidebar-divider my-0">
 
-    <li class="nav-item">
+    <hr class="sidebar-divider my-0">
+    <li class="nav-item {{ request()->is('sasaran') ? 'active' : '' }}">
         <a class="nav-link" href="{{ url('sasaran') }}">
         <i class="fas fa-fw fa-table"></i>
         <span>Sasaran Bantuan</span></a>
     </li>
-
-    <li class="nav-item">
+    <li class="nav-item {{ request()->is('jenisbantuan') ? 'active' : '' }}">
         <a class="nav-link" href="{{ url('jenisbantuan') }}">
         <i class="fas fa-fw fa-table"></i>
         <span>Jenis Bantuan</span></a>
     </li>
+    <li class="nav-item {{ request()->is('bantuan') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ url('bantuan') }}">
+        <i class="fas fa-fw fa-table"></i>
+        <span>Bantuan</span></a>
+    </li>
+    <hr class="sidebar-divider my-0">
 
+    <hr class="sidebar-divider my-0">
+    <li class="nav-item {{ request()->is('penyuluhan') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ url('penyuluhan') }}">
+        <i class="fas fa-fw fa-table"></i>
+        <span>Penyuluhan</span></a>
+    </li>
+    <li class="nav-item {{ request()->is('dilaksanakan') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ url('dilaksanakan') }}">
+        <i class="fas fa-fw fa-table"></i>
+        <span>Hadir</span></a>
+    </li>
+    <li class="nav-item {{ request()->is('tidak_dilaksanakan') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ url('tidak_dilaksanakan') }}">
+        <i class="fas fa-fw fa-table"></i>
+        <span>Tidak Hadir</span></a>
+    </li>
+    <li class="nav-item {{ request()->is('laporan_penyuluhan') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ url('laporan_penyuluhan') }}">
+        <i class="fas fa-fw fa-table"></i>
+        <span>Laporan Penyuluhan</span></a>
+    </li>
+    <li class="nav-item {{ request()->is('lampiran') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ url('lampiran') }}">
+        <i class="fas fa-fw fa-table"></i>
+        <span>Lampiran Penyuluhan</span></a>
+    </li>
+    <hr class="sidebar-divider my-0">
+    @endif
+
+    @if (Auth::user()->name == 'Kepala Desa')
+    <h4> ===Bantuan===== </h4>
     <li class="nav-item">
         <a class="nav-link" href="{{ url('bantuan') }}">
         <i class="fas fa-fw fa-table"></i>
         <span>Bantuan</span></a>
     </li>
-
+    <h4> ===Penyuluhan===== </h4>
     <li class="nav-item">
         <a class="nav-link" href="{{ url('penyuluhan') }}">
         <i class="fas fa-fw fa-table"></i>
         <span>Penyuluhan</span></a>
     </li>
+    @endif
 
+    @if (Auth::user()->name == 'Kadus')
+    <h4> ===Bantuan===== </h4>
     <li class="nav-item">
-        <a class="nav-link" href="{{ url('dilaksanakan') }}">
+        <a class="nav-link" href="{{ url('bantuan') }}">
         <i class="fas fa-fw fa-table"></i>
-        <span>Laporan Hadir</span></a>
+        <span>Bantuan</span></a>
     </li>
-
+    <h4> ===Penyuluhan===== </h4>
     <li class="nav-item">
-        <a class="nav-link" href="{{ url('tidak_dilaksanakan') }}">
+        <a class="nav-link" href="{{ url('penyuluhan') }}">
         <i class="fas fa-fw fa-table"></i>
-        <span>Laporan Tidak Hadir</span></a>
+        <span>Penyuluhan</span></a>
     </li>
-
-    <!-- Nav Item - Utilities Collapse Menu -->
-        {{-- <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Penjualan</span>
-        </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Penjualan Components:</h6>
-            <a class="collapse-item" href="{{url('penjualan')}}">Master</a>
-            <a class="collapse-item" href="#">Sub Master</a>
-            </div>
-        </div>
-        </li> --}}
+    @endif
     <hr class="sidebar-divider d-none d-md-block">
     <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>

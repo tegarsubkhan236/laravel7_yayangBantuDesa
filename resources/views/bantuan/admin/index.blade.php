@@ -3,19 +3,32 @@
 <div class="container-fluid">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Table Bantuan</h1>
-        {{-- <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" href="{{ url('bantuan/create') }}" data-toggle="modal" data-target="#AddModal">
+        @if (Auth::user()->name == 'admin')
+        <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" href="{{ url('bantuan/create') }}">
             Tambah Bantuan
-        </a> --}}
+        </a>
+        @endif
     </div>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
+        @if (Auth::user()->name == 'admin')
         <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Data Bantuan</h6>
+            <a href="{{ url('bantuan/cetak_pdf') }}" class="btn btn-primary" target="_blank">CETAK PDF</a>
         </div>
+        @endif
         @if (session('status'))
-            <div class="alert alert-success">
+            <div class="alert alert-warning">
                 {{ session('status') }}
+            </div>
+        @endif
+        @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
             </div>
         @endif
         <div class="card-body">
@@ -27,20 +40,17 @@
                     <th>NIK</th>
                     <th>KK</th>
                     <th>Nama</th>
-                    {{-- <th>Jenis Kelamin</th>
-                    <th>Alamat</th>
-                    <th>No Telp</th> --}}
                     <th>Pekerjaan</th>
                     <th>Penghasilan</th>
-                    {{-- <th>Pendidikan</th> --}}
-                    {{-- <th>Jumlah Keluarga</th> --}}
+                    <th>Foto Profil</th>
+                    <th>Foto KK</th>
+                    <th>Foto KTP</th>
                     <th>Jenis Bantuan</th>
-                    <th>Sasaran</th>
-                    <th>Kriteria</th>
-                    {{-- <th>Nominal Bantuan</th> --}}
                     <th>Tanggal Pengajuan</th>
                     <th>Status</th>
+                    @if (Auth::user()->name == 'admin')
                     <th>Action</th>
+                    @endif
                 </tr>
             </thead>
             <tbody>
@@ -50,19 +60,15 @@
                     <td>{{ $bantuan->penduduk->nik }}</td>
                     <td>{{ $bantuan->penduduk->kk }}</td>
                     <td>{{ $bantuan->penduduk->nama }}</td>
-                    {{-- <td>{{ $bantuan->penduduk->jenis_kelamin }}</td>
-                    <td>{{ $bantuan->penduduk->alamat }}</td>
-                    <td>{{ $bantuan->penduduk->no_hp }}</td> --}}
-                    <td>{{ $bantuan->penduduk->pekerjaan }}</td>
-                    <td>{{ $bantuan->penduduk->penghasilan }}</td>
-                    {{-- <td>{{ $bantuan->penduduk->pendidikan }}</td>
-                    <td>{{ $bantuan->penduduk->jumlah_keluarga }}</td> --}}
+                    <td>{{ $bantuan->penduduk->pekerjaan->pekerjaan }}</td>
+                    <td>{{ $bantuan->penduduk->pekerjaan->penghasilan }}</td>
+                    <td><img src="{{asset('profil/'.$bantuan->profil)}}" height="128"></td>
+                    <td><img src="{{asset('kk/'.$bantuan->kk)}}" height="128"></td>
+                    <td><img src="{{asset('ktp/'.$bantuan->ktp)}}" height="128"></td>
                     <td>{{ $bantuan->jenisbantuan->nama }}</td>
-                    {{-- <td>{{ $bantuan->sasaran->sasaran }}</td> --}}
-                    <td>{{ $bantuan->jenisbantuan->sasaran->sasaran }}</td>
-                    <td>{{ $bantuan->jenisbantuan->sasaran->kriteria }}</td>
                     <td>{{ $bantuan->created_at->format('d-m-Y') }}</td>
                     <td>{{ $bantuan->status }}</td>
+                    @if (Auth::user()->name == 'admin')
                     <td class="text-center">
                         <a href="{{ url('bantuan/'.$bantuan->id.'/edit') }}" class="btn btn-primary btn-circle btn-sm">
                             <i class="fa fa-info"></i>
@@ -75,6 +81,7 @@
                             </button>
                         </form>
                     </td>
+                    @endif
                 </tr>
                 @endforeach
             </tbody>
@@ -84,73 +91,5 @@
     </div>
     </div>
 </div>
-
-<!-- add Modal-->
-{{-- <div class="modal fade" id="AddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-    <div class="modal-content">
-
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Tambah Data bantuan</h5>
-            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
-            </button>
-        </div>
-
-        <div class="modal-body">
-            <form action="{{url('bantuan')}}" method="POST">
-                @csrf
-                <div class="form-group">
-                    <label>Penduduk</label>
-                    <select name="penduduk_id" class="form-control" autofocus>
-                        @foreach ($penduduk as $item)
-                        <option value="{{ $item->id }}">{{ $item->id }}  {{ $item->nama }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>bantuanname</label>
-                    <input type="text" 
-                    name="name" 
-                    value="{{ old('name') }}" 
-                    class="form-control 
-                    @error('name') is-invalid @enderror" autofocus>
-                    @error('name')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" 
-                    name="email" 
-                    value="{{ old('email') }}" 
-                    class="form-control 
-                    @error('email') is-invalid @enderror" autofocus>
-                    @error('email')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="text" 
-                    name="password" 
-                    value="{{ old('password') }}" 
-                    class="form-control 
-                    @error('password') is-invalid @enderror" autofocus>
-                    @error('password')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-        </div>
-
-        <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <button class="btn btn-success" type="submit">Save</button>
-            </form>
-        </div>
-    </div>
-    </div>
-</div>
-end AddModal --}}
 
 @endsection

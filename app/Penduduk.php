@@ -12,4 +12,9 @@ class Penduduk extends Model
     {
         return $this->hasOne('App\User');
     }
+
+    public function pekerjaan()
+    {
+        return $this->belongsTo(Pekerjaan::class, 'pekerjaan_id');
+    }
 }

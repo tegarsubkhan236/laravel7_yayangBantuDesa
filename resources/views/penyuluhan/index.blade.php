@@ -3,16 +3,20 @@
 <div class="container-fluid">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Table Penyuluhan</h1>
+        @if (Auth::user()->name == 'admin')
         <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" href="{{ url('penyuluhan/create') }}" data-toggle="modal" data-target="#AddModal">
             Tambah Penyuluhan
         </a>
+        @endif
     </div>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
+        @if (Auth::user()->name == 'admin')
         <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Data Penyuluhan</h6>
+            <a href="{{ url('penyuluhan/cetak_pdf') }}" class="btn btn-primary" target="_blank">CETAK PDF</a>
         </div>
+        @endif
         @if (session('status'))
             <div class="alert alert-success">
                 {{ session('status') }}
@@ -23,28 +27,32 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
                 <tr>
+                    {{-- <th>ID</th> --}}
+                    <th>Tanggal Hadir</th>
                     <th>ID Bantuan</th>
                     <th>Nama Bantuan</th>
                     <th>Nama Penerima</th>
                     <th>Tempat</th>
                     <th>Tanggal Penyuluhan</th>
                     <th>Status</th>
+                    @if (Auth::user()->name == 'admin')
                     <th>Action</th>
+                    @endif
                 </tr>
             </thead>
             <tbody>
                 @foreach ($penyuluhan as $x)
                 <tr>
+                    {{-- <td>{{ $x->id }}</td> --}}
+                    <td>{{ $x->created_at->format('d-m-Y') }}</td>
                     <td>{{ $x->bantuan->id }}</td>
                     <td>{{ $x->bantuan->jenisbantuan->nama }}</td>
                     <td>{{ $x->bantuan->penduduk->nama }}</td>
-                    <td>{{ $x->tempat }}</td>
-                    <td>{{ $x->tanggal_penyuluhan }}</td>
+                    <td>{{ $x->bantuan->jenisbantuan->tempat }}</td>
+                    <td>{{ $x->bantuan->jenisbantuan->tgl_penyuluhan->format('d-m-Y') }}</td>
                     <td>{{ $x->status }}</td>
+                    @if (Auth::user()->name == 'admin')
                     <td class="text-center">
-                        {{-- <a href="{{ url('penyuluhan/'.$x->id) }}" class="btn btn-success btn-circle btn-sm">
-                            <i class="fa fa-check"></i>
-                        </a> --}}
                         <a href="{{ url('penyuluhan/'.$x->id.'/edit') }}" class="btn btn-primary btn-circle btn-sm">
                             <i class="fa fa-info"></i>
                         </a>
@@ -56,20 +64,21 @@
                             </button>
                         </form>
                     </td>
+                    @endif
                 </tr>
                 @endforeach
             </tbody>
             </table>
             <br><br>
+
             <form action="">
+                @foreach ($jenis as $x)
                 <div class="form-group">
-                    <label for="">Telah di laksanakan</label>
-                    <input type="text" class="form-control" value="{{ $dilaksanakan }}" readonly>
+                    <label>{{ $x->nama }}</label>
+                    <input type="text" class="form-control" value="Nama Bantuan = {{ $x->nama }}, dengan Kuota = {{ $x->kuota_tetap }}" readonly>
+                    <input type="text" class="form-control" value="Kuota Tersisa = {{ $x->kuota }}" readonly>
                 </div>
-                <div class="form-group">
-                    <label for="">Tidak di laksanakan</label>
-                    <input type="text" class="form-control" value="{{ $tidak_dilaksanakan }}" readonly>
-                </div>
+                @endforeach
             </form>
         </div>
         </div>
@@ -96,36 +105,14 @@
                     <label>ID Bantuan</label>
                     <select name="bantuan_id" class="form-control">
                         @foreach ($bantuan as $x)
-                        <option value="{{$x->id}}|{{$x->user->id}}"> 
+                        <option value="{{$x->id}}|{{$x->user->id}}|{{$x->jenisbantuan->id}}|1"> 
                             ID : {{$x->id}} |
                             [nama bantuan : {{$x->jenisbantuan->nama}}] |
                             [Penerima : {{$x->penduduk->nama}}]
                         </option>
                         @endforeach
                     </select>
-                </div> 
-                <div class="form-group">
-                    <label>Tempat Penyuluhan</label>
-                    <input type="text" 
-                    name="tempat" 
-                    value="{{ old('tempat') }}" 
-                    class="form-control 
-                    @error('tempat') is-invalid @enderror" autofocus>
-                    @error('tempat')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div> 
-                <div class="form-group">
-                    <label>Tanggal Penyuluhan</label>
-                    <input type="date" 
-                    name="tanggal_penyuluhan" 
-                    value="{{ old('tanggal_penyuluhan') }}" 
-                    class="form-control 
-                    @error('tanggal_penyuluhan') is-invalid @enderror" autofocus>
-                    @error('tanggal_penyuluhan')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div> 
+                </div>
                 <div class="form-group">
                     <label>Status</label>
                     <select name="status" class="form-control">

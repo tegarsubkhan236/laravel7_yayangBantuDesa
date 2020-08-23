@@ -19,14 +19,28 @@ Route::get('/', function () {
 // ['register' => false]
 Auth::routes(['register' => false]);
 
+//cetak laporan
+Route::get('/laporan_penyuluhan', 'PenyuluhanController@laporan_sorted');
+Route::post('/laporan_penyuluhan_process', 'PenyuluhanController@laporan_sorted_process');
+
+Route::get('/bantuan/cetak_pdf', 'BantuanController@cetak_pdf');
+Route::get('/cetak_undangan/{id}', 'JenisBantuanController@cetak_undangan');
+Route::get('/penyuluhan/cetak_pdf', 'PenyuluhanController@cetak_pdf');
+Route::get('/penduduk/cari', 'PendudukController@cari');
+
+Route::post('bantuan/store/admin', 'BantuanController@store_admin');
+
+
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('user', 'UserController');
 Route::resource('penduduk', 'PendudukController');
 
 Route::resource('/sasaran', 'SasaranController');
+Route::resource('/pekerjaan', 'PekerjaanController');
 Route::resource('/jenisbantuan', 'JenisBantuanController');
 Route::resource('/bantuan', 'BantuanController');
 Route::resource('/penyuluhan', 'PenyuluhanController');
 
 Route::resource('/dilaksanakan', 'KuotaController');
 Route::resource('/tidak_dilaksanakan', 'BelumTerlaksanakanController');
+Route::resource('/lampiran', 'LampiranController');

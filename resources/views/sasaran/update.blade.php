@@ -17,25 +17,12 @@
                 @csrf
                 <div class="form-group">
                     <label>Sasaran</label>
-                    <input type="text" 
-                    name="sasaran" 
-                    value="{{ old('sasaran', $data->sasaran) }}" 
-                    class="form-control 
-                    @error('sasaran') is-invalid @enderror" autofocus>
-                    @error('sasaran')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label>Kriteria Penghasilan</label>
-                    <input type="text" 
-                    name="kriteria" 
-                    value="{{ old('kriteria', $data->kriteria) }}" 
-                    class="form-control 
-                    @error('kriteria') is-invalid @enderror" autofocus>
-                    @error('kriteria')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+                    <select name="pekerjaan_id" class="form-control">
+                        <option value="{{$data->pekerjaan_id}}">{{$data->pekerjaan->pekerjaan}}</option>
+                        @foreach ($pekerjaan as $x)
+                            <option value="{{$x->id}}">{{$x->id}}|{{$x->pekerjaan}}|{{$x->penghasilan}}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <button class="btn btn-secondary" type="button" onclick="history.go(-1);" data-dismiss="modal">Cancel</button>
                 <button class="btn btn-success" type="submit">Save</button>

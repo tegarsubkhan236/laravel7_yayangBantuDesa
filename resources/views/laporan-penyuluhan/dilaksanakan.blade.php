@@ -1,4 +1,7 @@
 @extends('home')
+@section('title')
+    Laporan Penyuluhan Dilaksanakan    
+@endsection
 @section('content')
 <div class="container-fluid">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -17,7 +20,7 @@
         @endif
         <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="table table-bordered" id="dataTable"  width="100%" cellspacing="0">
             <thead>
                 <tr>
                     <th>No</th>
@@ -25,6 +28,7 @@
                     <th>Nama Penerima</th>
                     <th>Nominal Diterima</th>
                     <th>Tanggal Pengajuan</th>
+                    <th>Tempat Penyuluhan</th>
                     <th>Tanggal Penyuluhan</th>
                     <th>Status</th>
                 </tr>
@@ -37,7 +41,8 @@
                     <td>{{ $x->bantuan->penduduk->nama }}</td>
                     <td>Rp. {{ $x->bantuan->jenisbantuan->nominal }}</td>
                     <td>{{ $x->bantuan->created_at->format('d-m-Y') }}</td>
-                    <td>{{ $x->tanggal_penyuluhan }}</td>
+                    <td>{{ $x->bantuan->jenisbantuan->tempat }}</td>
+                    <td>{{ $x->bantuan->jenisbantuan->tgl_penyuluhan->format('d-m-Y') }}</td>
                     <td>{{ $x->status }}</td>
                 </tr>
                 @endforeach

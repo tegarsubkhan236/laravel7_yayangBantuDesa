@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\jenisBantuan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -24,11 +26,37 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $id = Auth::id();
-        if ($id == 1) {
-            return view('home');
+        $penduduk = DB::table("penduduks");
+        $user = DB::table('users');
+        $jenis = jenisBantuan::all();
+        $pekerjaan = DB::table('pekerjaans');
+
+        if (Auth::user()->name == "admin") {
+            return view('dashboard', compact(
+                'penduduk',
+                'user',
+                'jenis',
+                'pekerjaan'
+            ));
+            // return $penduduk->count();
         };
-        if ($id != 1) {
+        if (Auth::user()->name == "Kepala Desa") {
+            return view('dashboard', compact(
+                'penduduk',
+                'user',
+                'jenis',
+                'pekerjaan'
+            ));
+        };
+        if (Auth::user()->name == "Kadus") {
+            return view('dashboard', compact(
+                'penduduk',
+                'user',
+                'jenis',
+                'pekerjaan'
+            ));
+        };
+        if (Auth::user()->name != "admin" || "Kepala Desa" || "Kadus") {
             // return Auth::user();
             return view('landing-page');
         };

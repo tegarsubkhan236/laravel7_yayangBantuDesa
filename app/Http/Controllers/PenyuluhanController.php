@@ -5,9 +5,44 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Penyuluhan;
 use App\Bantuan;
+use App\jenisBantuan;
+use PDF;
 
 class PenyuluhanController extends Controller
 {
+    public function laporan_sorted()
+    {
+        return view('penyuluhan.laporan_tanggal');
+    }
+
+    public function laporan_sorted_process(Request $req)
+    {
+        $validateData = $req->validate([
+            'start' => 'required',
+            'end' => 'required',
+        ]);
+
+        $find = Penyuluhan::where("created_at", ">=", $req->start)->where("created_at", "<=", $req->end);
+        if ($find->count() > 0) {
+            $penyuluhan = $find;
+            $pdf = PDF::setPaper('a4', 'landscape')->loadView("penyuluhan.laporan_sorted", [
+                "penyuluhan" => $penyuluhan,
+                "req" => $req,
+            ]);
+            return $pdf->download('laporan_penyuluhan_' . time() . '.pdf');
+        } else {
+            // $pesan = "Data dengan awal $req->start dan akhir $req->end tidak ditemukan";
+            return redirect('/laporan_penyuluhan')->with('status', 'Data tidak ditemukan');
+        }
+        // return $find;
+    }
+
+    public function cetak_pdf()
+    {
+        $penyuluhan = Penyuluhan::all();
+        $pdf = PDF::loadview('penyuluhan.penyuluhan_pdf', compact('penyuluhan'))->setPaper('a4', 'landscape');
+        return $pdf->download('laporan-penyuluhan-pdf');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,11 +52,12 @@ class PenyuluhanController extends Controller
     {
         $bantuan = Bantuan::where('status', 'Diterima')->get();
         $penyuluhan = Penyuluhan::with('bantuan')->get();
-        $dilaksanakan = Penyuluhan::all()->where('status', 'Sudah Dilaksanakan')->count();
-        $tidak_dilaksanakan = Penyuluhan::all()->where('status', 'Tidak Dilaksanakan')->count();
-        // return $bantuan;
-        return view('penyuluhan.index', compact('penyuluhan', 'bantuan', 'dilaksanakan', 'tidak_dilaksanakan'));
-        // return $penyuluhan;
+        $jenis = jenisBantuan::all();
+
+        // $dilaksanakan = Penyuluhan::all()->where('status', 'Sudah Dilaksanakan')->count();
+        // $tidak_dilaksanakan = Penyuluhan::all()->where('status', 'Tidak Dilaksanakan')->count();
+
+        return view('penyuluhan.index', compact('penyuluhan', 'bantuan', 'jenis'));
     }
 
     /**
@@ -44,8 +80,6 @@ class PenyuluhanController extends Controller
     {
         $validateData = $request->validate([
             'bantuan_id' => 'required',
-            'tempat' => 'required',
-            'tanggal_penyuluhan' => 'required',
             'status' => 'required',
         ]);
         $data = new Penyuluhan;
@@ -55,10 +89,13 @@ class PenyuluhanController extends Controller
 
         $data->bantuan_id = $bantuan_id_explode[0];
         $data->user_id = $bantuan_id_explode[1];
-        $data->tempat = $request->tempat;
-        $data->tanggal_penyuluhan = $request->tanggal_penyuluhan;
+        $data->jenisbantuan_id = $bantuan_id_explode[2];
         $data->status = $request->status;
         $data->save();
+
+        $jenis = jenisBantuan::findOrFail($bantuan_id_explode[2]);
+        $jenis->kuota -= $bantuan_id_explode[3];
+        $jenis->save();
         return redirect('penyuluhan')->with('status', 'Data Penyuluhan berhasil di Tambah !');
     }
 
@@ -100,17 +137,13 @@ class PenyuluhanController extends Controller
     {
         $validateData = $request->validate([
             'bantuan_id' => 'required',
-            'tempat' => 'required',
-            'tanggal_penyuluhan' => 'required',
             'status' => 'required',
         ]);
         $data = Penyuluhan::find($id);
         $data->bantuan_id = $request->bantuan_id;
-        $data->tempat = $request->tempat;
-        $data->tanggal_penyuluhan = $request->tanggal_penyuluhan;
         $data->status = $request->status;
         $data->save();
-        return redirect('penyuluhan')->with('status', 'Data Penyuluhan berhasil di Tambah !');
+        return redirect('penyuluhan')->with('status', 'Data Penyuluhan berhasil di Update !');
     }
 
     /**

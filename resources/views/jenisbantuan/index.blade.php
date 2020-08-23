@@ -18,6 +18,15 @@
                 {{ session('status') }}
             </div>
         @endif
+        @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -28,7 +37,10 @@
                     <th>Asal Bantuan</th>
                     <th>Bentuk Bantuan</th>
                     <th>Nominal Bantuan</th>
+                    <th>Kuota Tetap</th>
                     <th>Kuota</th>
+                    <th>Tempat Penyuluhan</th>
+                    <th>Tanggal Penyuluhan</th>
                     <th>Sasaran</th>
                     <th>Kriteria Penghasilan</th>
                     <th>Action</th>
@@ -42,10 +54,16 @@
                     <td>{{ $jenisbantuan->asal_bantuan }}</td>
                     <td>{{ $jenisbantuan->bentuk_bantuan }}</td>
                     <td>Rp. {{ $jenisbantuan->nominal }}</td>
+                    <td>{{ $jenisbantuan->kuota_tetap }} Orang</td>
                     <td>{{ $jenisbantuan->kuota }} Orang</td>
-                    <td>{{ $jenisbantuan->sasaran->sasaran }}</td>
-                    <td>{{ $jenisbantuan->sasaran->kriteria }}</td>
+                    <td>{{ $jenisbantuan->tempat }}</td>
+                    <td>{{ $jenisbantuan->tgl_penyuluhan->format('d-m-Y') }}</td>
+                    <td>{{ $jenisbantuan->sasaran->pekerjaan->pekerjaan }}</td>
+                    <td>{{ $jenisbantuan->sasaran->pekerjaan->penghasilan }}</td>
                     <td class="text-center">
+                        <a href="{{ url('cetak_undangan/'.$jenisbantuan->id) }}" class="btn btn-primary btn-sm">
+                            Undangan
+                        </a>
                         <a href="{{ url('jenisbantuan/'.$jenisbantuan->id.'/edit') }}" class="btn btn-primary btn-circle btn-sm">
                             <i class="fa fa-info"></i>
                         </a>
@@ -128,7 +146,7 @@
                 </div>
                 <div class="form-group">
                     <label>Kuota</label>
-                    <input type="text" 
+                    <input type="number" 
                     name="kuota" 
                     value="{{ old('kuota') }}" 
                     class="form-control 
@@ -138,10 +156,32 @@
                     @enderror
                 </div>
                 <div class="form-group">
+                    <label>Tempat Penyuluhan</label>
+                    <input type="text" 
+                    name="tempat" 
+                    value="{{ old('tempat') }}" 
+                    class="form-control 
+                    @error('tempat') is-invalid @enderror" autofocus>
+                    @error('tempat')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label>Tanggal Penyuluhan</label>
+                    <input type="date" 
+                    name="tgl_penyuluhan" 
+                    value="{{ old('tgl_penyuluhan') }}" 
+                    class="form-control 
+                    @error('tgl_penyuluhan') is-invalid @enderror" autofocus>
+                    @error('tgl_penyuluhan')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="form-group">
                     <label>Sasaran</label>
                     <select name="sasaran_id" class="form-control">
                         @foreach ($sasaran as $x)
-                        <option value="{{ $x->id }}"> {{$x->sasaran}} = {{$x->kriteria}} </option>
+                        <option value="{{ $x->id }}"> {{$x->pekerjaan->pekerjaan}} = {{$x->pekerjaan->penghasilan}} </option>
                         @endforeach
                     </select>
                 </div>

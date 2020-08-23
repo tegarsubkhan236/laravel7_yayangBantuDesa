@@ -10,4 +10,9 @@ class Penyuluhan extends Model
     {
         return $this->belongsTo('App\Bantuan')->where('status', 'Diterima');
     }
+
+    public function jenisbantuan()
+    {
+        return $this->belongsTo(jenisBantuan::class);
+    }
 }

@@ -5,9 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\jenisBantuan;
 use App\Sasaran;
+use PDF;
 
 class JenisBantuanController extends Controller
 {
+    public function cetak_undangan($id)
+    {
+        $data = jenisBantuan::find($id);
+        $pdf = PDF::loadview('undangan_pdf', compact('data'))->setPaper('a4', 'portrait');
+        return $pdf->stream();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -44,6 +51,9 @@ class JenisBantuanController extends Controller
             'bentuk_bantuan' => 'required',
             'nominal' => 'required',
             'kuota' => 'required',
+            // 'kuota_tetap' => 'required',
+            'tempat' => 'required',
+            'tgl_penyuluhan' => 'required',
             'sasaran_id' => 'required',
         ]);
         $data = new jenisBantuan;
@@ -51,7 +61,10 @@ class JenisBantuanController extends Controller
         $data->asal_bantuan = $request->asal_bantuan;
         $data->bentuk_bantuan = $request->bentuk_bantuan;
         $data->nominal = $request->nominal;
+        $data->kuota_tetap = $request->kuota;
         $data->kuota = $request->kuota;
+        $data->tempat = $request->tempat;
+        $data->tgl_penyuluhan = $request->tgl_penyuluhan;
         $data->sasaran_id = $request->sasaran_id;
         $data->save();
         return redirect('jenisbantuan')->with('status', 'Data Jenis Bantuan berhasil di Tambah !');
@@ -77,7 +90,8 @@ class JenisBantuanController extends Controller
     public function edit($id)
     {
         $data = jenisBantuan::find($id);
-        return view('jenisbantuan.update', compact('data'));
+        $sasaran = Sasaran::all();
+        return view('jenisbantuan.update', compact('data', 'sasaran'));
     }
 
     /**
@@ -94,7 +108,8 @@ class JenisBantuanController extends Controller
             'asal_bantuan' => 'required',
             'bentuk_bantuan' => 'required',
             'nominal' => 'required',
-            'kuota' => 'required',
+            'tempat' => 'required',
+            'tgl_penyuluhan' => 'required',
             'sasaran_id' => 'required',
         ]);
         $data = jenisBantuan::find($id);
@@ -102,7 +117,8 @@ class JenisBantuanController extends Controller
         $data->asal_bantuan = $request->asal_bantuan;
         $data->bentuk_bantuan = $request->bentuk_bantuan;
         $data->nominal = $request->nominal;
-        $data->kuota = $request->kuota;
+        $data->tempat = $request->tempat;
+        $data->tgl_penyuluhan = $request->tgl_penyuluhan;
         $data->sasaran_id = $request->sasaran_id;
         $data->save();
         return redirect('jenisbantuan')->with('status', 'Data Jenis Bantuan berhasil di Update !');

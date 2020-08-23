@@ -42,15 +42,18 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $validateData = $request->validate([
-            // 'penduduk_id' => 'penduduk_id',
-            'name' => 'required',
-            'email' => 'required',
-            'password' => 'required',
+            'password' => 'required|min:8|regex:/[0-9]/|regex:/[a-z]/',
         ]);
+
         $data = new User;
-        $data->penduduk_id = $request->penduduk_id;
-        $data->name = $request->name;
-        $data->email = $request->email;
+
+        $penduduk = $request["penduduk_id"];
+        $penduduk_explode = explode("|", $penduduk);
+
+        // return $penduduk_explode;
+        $data->penduduk_id = $penduduk_explode[0];
+        $data->name = $penduduk_explode[1];
+        $data->nik = $penduduk_explode[2];
         $data->password = Hash::make($request->password);
         $data->save();
         return redirect('user')->with('status', 'Data parfum berhasil di Tambah !');
@@ -89,18 +92,13 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $validateData = $request->validate([
-            // 'penduduk_id' => 'penduduk_id',
-            'name' => 'required',
-            'email' => 'required',
-            'password' => 'required',
+            'password' => 'required|min:8|regex:/[0-9]/|regex:/[a-z]/',
         ]);
+
         $data = User::find($id);
-        // $data->penduduk_id = $request->penduduk_id;
-        $data->name = $request->name;
-        $data->email = $request->email;
         $data->password = Hash::make($request->password);
         $data->save();
-        return redirect('user')->with('status', 'Data parfum berhasil di Update !');
+        return redirect('user')->with('status', 'Data User berhasil di Update !');
     }
 
     /**

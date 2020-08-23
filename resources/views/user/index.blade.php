@@ -18,6 +18,15 @@
                 {{ session('status') }}
             </div>
         @endif
+        @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -25,8 +34,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Nama</th>
-                    <th>Username</th>
-                    <th>Email</th>
+                    <th>NIK</th>
                     <th>Password</th>
                     <th>Action</th>
                 </tr>
@@ -35,9 +43,8 @@
                 @foreach ($user as $user)
                 <tr>
                     <td>{{ $user->id }}</td>
-                    <td>{{ $user->penduduk->nama }}</td>
                     <td>{{ $user->name }}</td>
-                    <td>{{ $user->email }}</td>
+                    <td>{{ $user->nik }}</td>
                     <td>{{ $user->password }}</td>
                     <td class="text-center">
                         <a href="{{ url('user/'.$user->id.'/edit') }}" class="btn btn-primary btn-circle btn-sm">
@@ -80,31 +87,9 @@
                     <label>Penduduk</label>
                     <select name="penduduk_id" class="form-control" autofocus>
                         @foreach ($penduduk as $item)
-                        <option value="{{ $item->id }}">{{ $item->id }}  {{ $item->nama }}</option>
+                        <option value="{{ $item->id }}|{{ $item->nama }}|{{ $item->nik }}">{{ $item->nik }} - {{ $item->nama }}</option>
                         @endforeach
                     </select>
-                </div>
-                <div class="form-group">
-                    <label>Username</label>
-                    <input type="text" 
-                    name="name" 
-                    value="{{ old('name') }}" 
-                    class="form-control 
-                    @error('name') is-invalid @enderror" autofocus>
-                    @error('name')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" 
-                    name="email" 
-                    value="{{ old('email') }}" 
-                    class="form-control 
-                    @error('email') is-invalid @enderror" autofocus>
-                    @error('email')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
                 </div>
                 <div class="form-group">
                     <label>Password</label>

@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Pekerjaan;
 use Illuminate\Http\Request;
 use App\Penduduk;
 use Illuminate\Support\Facades\Hash;
 
 class PendudukController extends Controller
 {
+    public function cari(Request $request)
+    {
+        $cari = $request->cari;
+        $penduduks = Penduduk::where('kk', 'like', $cari)->get();
+        return view('penduduk.cari', compact('penduduks'));
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +23,8 @@ class PendudukController extends Controller
     public function index()
     {
         $penduduks = Penduduk::all();
-        return view('penduduk.index', compact("penduduks"));
+        $pekerjaan = Pekerjaan::all();
+        return view('penduduk.index', compact("penduduks", "pekerjaan"));
     }
 
     /**
@@ -38,28 +46,26 @@ class PendudukController extends Controller
     public function store(Request $request)
     {
         $validateData = $request->validate([
-            'nik' => 'required',
+            'nik' => 'required|size:12',
             'nama' => 'required',
             'alamat' => 'required',
-            'pekerjaan' => 'required',
-            'kk' => 'required',
+            'kk' => 'required|size:12',
             'no_hp' => 'required',
-            'penghasilan' => 'required',
             'pendidikan' => 'required',
             'jumlah_keluarga' => 'required',
             'jenis_kelamin' => 'required',
+            'pekerjaan_id' => 'required',
         ]);
         $data = new Penduduk;
         $data->nik = $request->nik;
         $data->nama = $request->nama;
         $data->alamat = $request->alamat;
-        $data->pekerjaan = $request->pekerjaan;
         $data->kk = $request->kk;
         $data->no_hp = $request->no_hp;
-        $data->penghasilan = $request->penghasilan;
         $data->pendidikan = $request->pendidikan;
         $data->jumlah_keluarga = $request->jumlah_keluarga;
         $data->jenis_kelamin = $request->jenis_kelamin;
+        $data->pekerjaan_id = $request->pekerjaan_id;
         $data->save();
         return redirect('penduduk')->with('status', 'Data Penduduk berhasil di Tambah !');
     }
@@ -84,7 +90,8 @@ class PendudukController extends Controller
     public function edit($id)
     {
         $data = Penduduk::find($id);
-        return view("penduduk.update", compact('data'));
+        $pekerjaan = Pekerjaan::all();
+        return view("penduduk.update", compact('data', 'pekerjaan'));
     }
 
     /**
@@ -100,10 +107,8 @@ class PendudukController extends Controller
             'nik' => 'required',
             'nama' => 'required',
             'alamat' => 'required',
-            'pekerjaan' => 'required',
             'kk' => 'required',
-            'no_telp' => 'required',
-            'penghasilan' => 'required',
+            'no_hp' => 'required',
             'pendidikan' => 'required',
             'jumlah_keluarga' => 'required',
             'jenis_kelamin' => 'required',
@@ -112,13 +117,12 @@ class PendudukController extends Controller
         $data->nik = $request->nik;
         $data->nama = $request->nama;
         $data->alamat = $request->alamat;
-        $data->pekerjaan = $request->pekerjaan;
         $data->kk = $request->kk;
-        $data->no_telp = $request->no_telp;
-        $data->penghasilan = $request->penghasilan;
+        $data->no_hp = $request->no_hp;
         $data->pendidikan = $request->pendidikan;
         $data->jumlah_keluarga = $request->jumlah_keluarga;
         $data->jenis_kelamin = $request->jenis_kelamin;
+        $data->pekerjaan_id = $request->pekerjaan_id;
         $data->save();
         return redirect('penduduk')->with('status', 'Data Penduduk berhasil di Update !');
     }

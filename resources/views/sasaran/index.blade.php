@@ -2,16 +2,16 @@
 @section('content')
 <div class="container-fluid">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Table Jenis sasaran</h1>
+        <h1 class="h3 mb-0 text-gray-800">Table Sasaran</h1>
         <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" href="{{ url('sasaran/create') }}" data-toggle="modal" data-target="#AddModal">
-            Tambah Jenis sasaran
+            Tambah Sasaran
         </a>
     </div>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Data Jenis sasaran</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Data Sasaran</h6>
         </div>
         @if (session('status'))
             <div class="alert alert-success">
@@ -24,8 +24,8 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Sasaran</th>
-                    <th>Kriteria Penghasilan</th>
+                    <th>Sasaran Pekerjaan</th>
+                    <th>Maksimal Penghasilan</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -33,8 +33,8 @@
                 @foreach ($sasaran as $x)
                 <tr>
                     <td>{{ $x->id }}</td>
-                    <td>{{ $x->sasaran }}</td>
-                    <td>Rp. {{ $x->kriteria }}</td>
+                    <td>{{ $x->pekerjaan->pekerjaan }}</td>
+                    <td>Rp. {{ $x->pekerjaan->penghasilan }}</td>
                     <td class="text-center">
                         <a href="{{ url('sasaran/'.$x->id.'/edit') }}" class="btn btn-primary btn-circle btn-sm">
                             <i class="fa fa-info"></i>
@@ -74,25 +74,11 @@
                 @csrf
                 <div class="form-group">
                     <label>Sasaran</label>
-                    <input type="text" 
-                    name="sasaran" 
-                    value="{{ old('sasaran') }}" 
-                    class="form-control 
-                    @error('sasaran') is-invalid @enderror" autofocus>
-                    @error('sasaran')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label>Kriteria</label>
-                    <input type="text" 
-                    name="kriteria" 
-                    value="{{ old('kriteria') }}" 
-                    class="form-control 
-                    @error('kriteria') is-invalid @enderror" autofocus>
-                    @error('kriteria')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+                    <select name="pekerjaan_id" class="form-control">
+                        @foreach ($pekerjaan as $x)
+                            <option value="{{$x->id}}">{{$x->id}} | {{$x->pekerjaan}} | {{$x->penghasilan}}</option>
+                        @endforeach
+                    </select>
                 </div>
         </div>
 

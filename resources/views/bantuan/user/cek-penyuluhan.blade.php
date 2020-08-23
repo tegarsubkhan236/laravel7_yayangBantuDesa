@@ -23,7 +23,7 @@
 <body class="goto-here">
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 		<div class="container">
-            <a class="navbar-brand" href="index.html">Desa Makmur Jaya</a>
+            <a class="navbar-brand" href="index.html">Desa Sukawana</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="oi oi-menu"></span> Menu
             </button>
@@ -78,8 +78,8 @@
                                 <td>{{ $data->bantuan->id }}</td>
                                 <td>{{ $data->bantuan->created_at->format('d-m-Y')}}</td>
                                 <td>{{ $data->bantuan->jenisbantuan->nama }}</td>
-                                <td>{{ $data->tempat }}</td>
-                                <td>{{ $data->tanggal_penyuluhan}}</td>
+                                <td>{{ $data->bantuan->jenisbantuan->tempat }}</td>
+                                <td>{{ $data->bantuan->jenisbantuan->tgl_penyuluhan}}</td>
                                 <td>{{ $data->status }}</td>
                         </tr>
                         @endforeach
@@ -91,24 +91,6 @@
         </div>
     </section>
 
-	<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
-        <div class="container py-4">
-            <div class="row d-flex justify-content-center py-5">
-            <div class="col-md-6">
-                <h2 style="font-size: 22px;" class="mb-0">Subcribe to our Newsletter</h2>
-                <span>Get e-mail updates about our latest shops and special offers</span>
-            </div>
-            <div class="col-md-6 d-flex align-items-center">
-                <form action="#" class="subscribe-form">
-                <div class="form-group d-flex">
-                    <input type="text" class="form-control" placeholder="Enter email address">
-                    <input type="submit" value="Subscribe" class="submit px-3">
-                </div>
-                </form>
-            </div>
-            </div>
-        </div>
-    </section>
     
 	<footer class="ftco-footer ftco-section">
         <div class="container">
