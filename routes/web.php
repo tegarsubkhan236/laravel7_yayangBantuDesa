@@ -17,7 +17,7 @@ Route::get('/', function () {
     return view('landing-page');
 });
 // ['register' => false]
-Auth::routes(['register' => false]);
+Auth::routes();
 
 //cetak laporan
 Route::get('/laporan_penyuluhan', 'PenyuluhanController@laporan_sorted');
